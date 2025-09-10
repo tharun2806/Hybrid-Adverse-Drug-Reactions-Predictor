@@ -125,6 +125,79 @@ The Docker build process will automatically extract the compressed project files
     ```bash
     streamlit run app.py
     ```
+=======
+To replicate the results or experiment with the models, please follow these steps:
+
+1. Ensure Git LFS is installed on your system, as the zip file is tracked using Git LFS.
+
+
+2.  **Clone the Repository**
+    ```bash
+    git clone [https://github.com/](https://github.com/)<your-username>/adr-prediction-stacked-ensemble.git
+    cd adr-prediction-stacked-ensemble
+    ```
+
+3. **Unzip the folder**
+The project files—including all models, TF-IDF files, one-hot encoders, scalers, and datasets—are provided as a single zip file  due to GitHub file size limitations. This zip contains the entire folder structure required for the app to run:
+
+The structure of the project is as follows: 
+**Project structure**
+```
+hybrid-adr-prediction/
+├── app.py                          # Main Streamlit application
+├── app_inference_utils.py          # Model loading and prediction utilities
+├── requirements.txt                # Python dependencies
+├── adr_models/                     # Trained ML models
+│   ├── adr_lightgbm_model.pkl
+│   ├── adr_xgboost_model.pkl
+│   ├── adr_catboost_model.pkl
+│   └── adr_meta_model1.pkl
+├── tfidfs/                         # TF-IDF vectorizers
+│   ├── tfidf_side_effect.pkl
+│   └── tfidf_indication.pkl
+├── one_hot_encoder/                # One-hot encoder
+│   ├── onehot_drug-001.pkl           # encoder 
+│   
+├── scaler/                         # Feature scaler
+│   └── scaler.pkl
+├── data/                           # Input data files
+│   ├── drug_names.tsv
+│   ├── meddra_all_indications.tsv
+│   └── meddra_all_se.tsv
+└── notebooks/                      # Jupyter notebooks (for reference)
+    ├── 1-adr_feature_engineering_and_analysis.ipynb
+    └── 2-adr_models.ipynb
+```
+Before running the app, you MUST:
+
+->Extract project_files.zip into the root of the cloned repository.
+
+->Ensure that the extracted folders (models/, tfidfs/, one_hot_encoder/, scaler/, data/) remain in place.
+
+->Do not rename or move any subfolders or files; the code expects this structure.
+
+->Without this step, the app will fail to load models, preprocessors, or datasets.
+
+
+4.  **Install Dependencies**
+    It is recommended to create a virtual environment. Install all required packages using the `requirements.txt` file.
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+
+5.  **Run the Streamlit App**
+    For the interactive web application:
+    ```bash
+    streamlit run app.py
+    ```
+    
+    **Note**: The app currently uses `sample_data.csv` (~50k rows) for demonstration purposes. The full dataset (`merged_data.csv`) contains **9.3 million rows**. If your system has sufficient capacity, you can change line 20 in `app.py` from `'data/sample_data.csv'` to `'data/merged_data.csv'` for access to the complete dataset.
+
+  **Optional: To Run the Notebook yourself**
+    Open the `notebooks/` directory and run the Jupyter notebooks in sequential order:
+    1.  `1_Feature_Engineering_and_Analysis.ipynb`
+    2.  `2_Adverse_Drug_Reaction_Models.ipynb`
 
 ---
 
