@@ -11,6 +11,20 @@ This work has been published by IEEE. For a detailed explanation of the methodol
 
 ---
 
+## 📂 Code Browsing
+For convenience, the **core source code and notebooks** are provided in the [`code/`](code) directory.  
+This includes:
+- `app.py` – the Streamlit application  
+- `app_inference_utils.py` – model loading and prediction utilities  
+- `requirements.txt` – Python dependencies  
+- Jupyter notebooks for feature engineering and modeling  
+
+⚠️ These files are provided for **easy inspection on GitHub**.  
+They are **duplicates of what’s inside the project zip** (`hybrid-adr-prediction.zip`) used by Docker builds.  
+Heavy assets (models, encoders, datasets) are not stored here to keep the repo lightweight.  
+
+---
+
 ## 1. Problem Statement
 Adverse Drug Reactions (ADRs) are a significant cause of morbidity and mortality worldwide, posing a major challenge to patient safety and placing a heavy burden on healthcare systems. The ability to prospectively identify high-risk combinations of drugs and patient indications can be a crucial step in mitigating these risks. This project addresses the critical need for an accurate and robust computational tool to predict the probability of an ADR, thereby enabling better clinical decision-making.
 
@@ -80,8 +94,8 @@ As shown, the meta-model increased the **$R^2$ score to 0.879**, explaining near
 1. Ensure you have [Docker](https://docs.docker.com/get-docker/) installed.
 2. Clone the repository:
     ```bash
-    git clone https://github.com/<your-username>/adr-prediction-stacked-ensemble.git
-    cd adr-prediction-stacked-ensemble
+    git clone https://github.com/tharun2806/Hybrid-Adverse-Drug-Reactions-Predictor.git
+    cd Hybrid-Adverse-Drug-Reactions
     ```
 3. Build the image:
     ```bash
@@ -101,8 +115,8 @@ The Docker build process will automatically extract the compressed project files
 1. Ensure Git LFS is installed on your system, as the zip file is tracked using Git LFS.
 2. Clone the repository:
     ```bash
-    git clone https://github.com/<your-username>/adr-prediction-stacked-ensemble.git
-    cd adr-prediction-stacked-ensemble
+    git clone https://github.com/tharun2806/Hybrid-Adverse-Drug-Reactions-Predictor.git
+    cd Hybrid-Adverse-Drug-Reactions
     ```
 3. Manually extract the `hybrid-adr-prediction.zip` file into the root of the cloned repository. The extracted folder (`hybrid-adr-prediction-fresh/`) must remain intact with the following structure:
     ```
