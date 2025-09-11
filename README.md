@@ -12,11 +12,10 @@ This work has been published by IEEE. For a detailed explanation of the methodol
 ---
 
 ## 📂 Code Browsing
-For convenience, the **core source code and notebooks** are provided in the [`code/`](code) directory.  
+For convenience, the **core source code and notebooks** are provided in the [`code files/`] directory.  
 This includes:
 - `app.py` – the Streamlit application  
-- `app_inference_utils.py` – model loading and prediction utilities  
-- `requirements.txt` – Python dependencies  
+- `app_inference_utils.py` – model loading and prediction utilities   
 - Jupyter notebooks for feature engineering and modeling  
 
 ⚠️ These files are provided for **easy inspection on GitHub**.  
