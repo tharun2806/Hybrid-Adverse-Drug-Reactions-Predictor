@@ -1,0 +1,9 @@
+services:
+  adr-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: adr-app
+    restart: unless-stopped
+    ports:
+      - "8501:8501"  

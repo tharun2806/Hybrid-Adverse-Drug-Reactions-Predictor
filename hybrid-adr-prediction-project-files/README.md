@@ -11,6 +11,20 @@ This work has been published by IEEE. For a detailed explanation of the methodol
 
 ---
 
+## 📂 Code Browsing
+For convenience, the **core source code and notebooks** are provided in the [`code/`](code) directory.  
+This includes:
+- `app.py` – the Streamlit application  
+- `app_inference_utils.py` – model loading and prediction utilities  
+- `requirements.txt` – Python dependencies  
+- Jupyter notebooks for feature engineering and modeling  
+
+⚠️ These files are provided for **easy inspection on GitHub**.  
+They are **duplicates of what’s inside the project zip** (`hybrid-adr-prediction.zip`) used by Docker builds.  
+Heavy assets (models, encoders, datasets) are not stored here to keep the repo lightweight.  
+
+---
+
 ## 1. Problem Statement
 Adverse Drug Reactions (ADRs) are a significant cause of morbidity and mortality worldwide, posing a major challenge to patient safety and placing a heavy burden on healthcare systems. The ability to prospectively identify high-risk combinations of drugs and patient indications can be a crucial step in mitigating these risks. This project addresses the critical need for an accurate and robust computational tool to predict the probability of an ADR, thereby enabling better clinical decision-making.
 
@@ -75,78 +89,56 @@ As shown, the meta-model increased the **$R^2$ score to 0.879**, explaining near
 ---
 
 ## 6. How to Replicate
-To replicate the results or experiment with the models, please follow these steps:
 
-1. Ensure Git LFS is installed on your system, as the zip file is tracked using Git LFS.
-
-
-2.  **Clone the Repository**
+### Option A: Run with Docker (Recommended)
+1. Ensure you have [Docker](https://docs.docker.com/get-docker/) installed.
+2. Clone the repository:
     ```bash
-    git clone [https://github.com/](https://github.com/)<your-username>/adr-prediction-stacked-ensemble.git
-    cd adr-prediction-stacked-ensemble
+    git clone https://github.com/tharun2806/Hybrid-Adverse-Drug-Reactions-Predictor.git
+    cd Hybrid-Adverse-Drug-Reactions
     ```
+3. Build the image:
+    ```bash
+    docker compose build
+    ```
+4. Run the container:
+    ```bash
+    docker compose up
+    ```
+5. Open [http://localhost:8501](http://localhost:8501) in your browser.
 
-3. **Unzip the folder**
-The project files—including all models, TF-IDF files, one-hot encoders, scalers, and datasets—are provided as a single zip file  due to GitHub file size limitations. This zip contains the entire folder structure required for the app to run:
+The Docker build process will automatically extract the compressed project files (models, TF-IDF, encoders, scalers, data, etc.), so no manual unzipping is required.
 
-The structure of the project is as follows: 
-**Project structure**
-```
-hybrid-adr-prediction/
-├── app.py                          # Main Streamlit application
-├── app_inference_utils.py          # Model loading and prediction utilities
-├── requirements.txt                # Python dependencies
-├── adr_models/                     # Trained ML models
-│   ├── adr_lightgbm_model.pkl
-│   ├── adr_xgboost_model.pkl
-│   ├── adr_catboost_model.pkl
-│   └── adr_meta_model1.pkl
-├── tfidfs/                         # TF-IDF vectorizers
-│   ├── tfidf_side_effect.pkl
-│   └── tfidf_indication.pkl
-├── one_hot_encoder/                # One-hot encoder
-│   ├── onehot_drug-001.pkl           # encoder 
-│   
-├── scaler/                         # Feature scaler
-│   └── scaler.pkl
-├── data/                           # Input data files
-│   ├── drug_names.tsv
-│   ├── meddra_all_indications.tsv
-│   └── meddra_all_se.tsv
-└── notebooks/                      # Jupyter notebooks (for reference)
-    ├── 1-adr_feature_engineering_and_analysis.ipynb
-    └── 2-adr_models.ipynb
-```
-Before running the app, you MUST:
+---
 
-->Extract project_files.zip into the root of the cloned repository.
-
-->Ensure that the extracted folders (models/, tfidfs/, one_hot_encoder/, scaler/, data/) remain in place.
-
-->Do not rename or move any subfolders or files; the code expects this structure.
-
-->Without this step, the app will fail to load models, preprocessors, or datasets.
-
-
-4.  **Install Dependencies**
-    It is recommended to create a virtual environment. Install all required packages using the `requirements.txt` file.
+### Option B: Manual Setup (Alternative)
+1. Ensure Git LFS is installed on your system, as the zip file is tracked using Git LFS.
+2. Clone the repository:
+    ```bash
+    git clone https://github.com/tharun2806/Hybrid-Adverse-Drug-Reactions-Predictor.git
+    cd Hybrid-Adverse-Drug-Reactions
+    ```
+3. Manually extract the `hybrid-adr-prediction.zip` file into the root of the cloned repository. The extracted folder (`hybrid-adr-prediction-fresh/`) must remain intact with the following structure:
+    ```
+    hybrid-adr-prediction-fresh/
+    ├── app.py
+    ├── app_inference_utils.py
+    ├── requirements.txt
+    ├── models/
+    ├── tfidfs/
+    ├── one_hot_encoder/
+    ├── scaler/
+    ├── data/
+    └── notebooks/
+    ```
+4. Install dependencies:
     ```bash
     pip install -r requirements.txt
     ```
-
-
-5.  **Run the Streamlit App**
-    For the interactive web application:
+5. Run the Streamlit app:
     ```bash
     streamlit run app.py
     ```
-    
-    **Note**: The app currently uses `sample_data.csv` (~50k rows) for demonstration purposes. The full dataset (`merged_data.csv`) contains **9.3 million rows**. If your system has sufficient capacity, you can change line 20 in `app.py` from `'data/sample_data.csv'` to `'data/merged_data.csv'` for access to the complete dataset.
-
-  **Optional: To Run the Notebook yourself**
-    Open the `notebooks/` directory and run the Jupyter notebooks in sequential order:
-    1.  `1_Feature_Engineering_and_Analysis.ipynb`
-    2.  `2_Adverse_Drug_Reaction_Models.ipynb`
 
 ---
 
@@ -163,3 +155,19 @@ If you use the code or findings from this project in your research, please cite 
 
 T. A and B. P, "Predicting Adverse Drug Reactions Using Machine Learning: A Hybrid Model Stacking Approach," 2025 Second International Conference on Cognitive Robotics and Intelligent Systems (ICC - ROBINS), Coimbatore, India, 2025, pp. 645-650, doi: 10.1109/ICC-ROBINS64345.2025.11086311.
 keywords: {Measurement;Drugs;Stacking;Medical services;Predictive models;Prediction algorithms;Data models;Reliability;Pharmaceutical industry;Random forests;Adverse drug reactions;machine learning;feature engineering;ensemble learning;LightGBM;XGBoost;CatBoost;stacking;meta model;random forest regressor},
+
+---
+
+## 9. Disclaimer
+
+This project is intended **solely for research and educational purposes**. While it leverages real-world datasets and rigorous machine learning techniques, the predictions generated by this system **should not be used for clinical decision-making, diagnosis, or treatment of patients**. Users are advised to consult qualified healthcare professionals for any medical decisions. The authors are not responsible for any outcomes resulting from the use of this software in real-world medical applications.
+
+---
+
+## 10. License
+
+This project is licensed under the **Apache License 2.0**. You may obtain a copy of the license at:
+
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an **"AS IS" BASIS**, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

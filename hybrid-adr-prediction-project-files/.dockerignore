@@ -1,0 +1,56 @@
+# Version control
+.git/
+.gitignore
+.svn/
+.hg/
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+
+# Development and IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build outputs and temp files
+dist/
+build/
+out/
+tmp/
+temp/
+*.tmp
+
+# Test and debug files
+test/
+tests/
+debug/
+*.log
+
+# Environment and secrets
+.env*
+*.pem
+*.key
+*.crt
+config.local.*
+*.local.yml
+.local/
+local/
+
+/docs/
+*.md
+
+# Jupyter notebooks
+/notebooks/
+
+
+# Docker metadata
+Dockerfile*
+docker-compose*
+
+# Misc
+*.ini
